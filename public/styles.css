@@ -1,0 +1,304 @@
+:root {
+  --bg-0: #0f1115;
+  --bg-1: #161922;
+  --panel: #1b1f2a;
+  --panel-border: rgba(255,255,255,0.06);
+  --text: #eef0f4;
+  --muted: #9099ab;
+  --accent: #c9a876;
+  --accent-soft: rgba(201,168,118,0.14);
+  --user-bubble: #2a3040;
+  --assistant-bubble: #20242f;
+  --crisis-bg: #2c1a1a;
+  --crisis-border: #b96a6a;
+  --notice-bg: #24262f;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow: 0 20px 60px -20px rgba(0,0,0,0.5);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-0: #f4f1ea;
+    --bg-1: #f9f7f2;
+    --panel: #ffffff;
+    --panel-border: rgba(20,20,20,0.06);
+    --text: #24221e;
+    --muted: #726c62;
+    --accent: #a97d3a;
+    --accent-soft: rgba(169,125,58,0.12);
+    --user-bubble: #efe5d4;
+    --assistant-bubble: #f4f1ea;
+    --crisis-bg: #fdecec;
+    --crisis-border: #d97a7a;
+    --notice-bg: #f0ece2;
+    --shadow: 0 20px 50px -25px rgba(80,60,20,0.25);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(201,168,118,0.10), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(120,140,200,0.08), transparent 55%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1));
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 20px 60px;
+}
+
+.app-header { margin-bottom: 28px; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.brand-mark {
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+.app-header h1 {
+  font-family: "Sora", sans-serif;
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+
+.mood-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+
+.mood-header h2 {
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.sparkline {
+  width: 120px;
+  height: 24px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.mood-scale {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mood-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--panel-border);
+  background: var(--bg-1);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.mood-btn:hover { transform: translateY(-2px); }
+
+.mood-btn.selected {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.mood-emoji { font-size: 1.1rem; }
+.mood-num { font-size: 0.7rem; color: var(--muted); font-weight: 600; }
+
+.mood-note {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--panel-border);
+  background: var(--bg-1);
+  color: var(--text);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  font-family: inherit;
+}
+
+.mood-note::placeholder { color: var(--muted); }
+
+.mood-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #1b160b;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.mood-status {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.mood-summary-text {
+  margin: 14px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 240px;
+  max-height: 480px;
+  overflow-y: auto;
+  margin-bottom: 14px;
+  padding-right: 4px;
+}
+
+.bubble {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  max-width: 85%;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+  animation: rise 0.18s ease;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bubble.user {
+  align-self: flex-end;
+  background: var(--user-bubble);
+  border-bottom-right-radius: 4px;
+}
+
+.bubble.assistant {
+  align-self: flex-start;
+  background: var(--assistant-bubble);
+  border: 1px solid var(--panel-border);
+  border-bottom-left-radius: 4px;
+}
+
+.bubble.crisis {
+  align-self: stretch;
+  background: var(--crisis-bg);
+  border: 1px solid var(--crisis-border);
+  max-width: 100%;
+}
+
+.bubble.notice {
+  align-self: stretch;
+  background: var(--notice-bg);
+  border: 1px dashed var(--panel-border);
+  color: var(--muted);
+  font-size: 0.85rem;
+  max-width: 100%;
+}
+
+.bubble.typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: blink 1.2s infinite ease-in-out;
+}
+.dot:nth-child(2) { animation-delay: 0.15s; }
+.dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.25; }
+  40% { opacity: 1; }
+}
+
+.chat-form {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.chat-form textarea {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--panel-border);
+  background: var(--bg-1);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.chat-form textarea::placeholder { color: var(--muted); }
+
+.disclaimer {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 14px 0 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .app { padding: 28px 14px 40px; }
+  .mood-emoji { font-size: 1rem; }
+}
